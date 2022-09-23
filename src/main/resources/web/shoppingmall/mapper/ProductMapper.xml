@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "=//mybatis.org//DTD Mapper 3.0//EN"
+	"http:/mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "web.shoppingmall.mapper.ProductMapper">
+	<insert id="productRegister">
+		<![CDATA[
+			INSERT INTO product VALUES (
+			    'p'
+			    || to_char(sysdate, 'YYYYMMDD')
+			    || substr(p_seq.NEXTVAL + 10000, 2),
+			    #{p_name},
+			    #{p_stat},
+			    #{p_stock},
+			    #{p_price},
+			    #{deliv_fee},
+			    #{s_num},
+			    #{manufac_num},
+			    #{category_num},
+			    #{reg_date},
+			    #{up_date}
+			)		
+		]]>
+	</insert>
+</mapper>
