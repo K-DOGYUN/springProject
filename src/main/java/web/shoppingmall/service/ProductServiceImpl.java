@@ -18,5 +18,10 @@ public class ProductServiceImpl implements ProductService{
 		mapper.productRegister(productVO);		
 	}
 	
+	@Override
+	public ProductVO pDisplay(String p_num) {
+		return mapper.productDisplay(p_num);
+	}
+	
 	
 }

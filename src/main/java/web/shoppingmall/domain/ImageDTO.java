@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class ImageDTO {
-	private String imageName;
-	private String imagePath;
-	private String imageUUID;
-	private String imageParent;
-	private String ParentType;
+	private String img_num;
+	private String img_name;
+	private String img_path;
+	private String img_UUID;
+	private String parent_num;
+	private String parent_type;
 }

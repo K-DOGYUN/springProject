@@ -82,9 +82,9 @@ public class ImageController {
 			System.out.println(imageUUID);
 			System.out.println(mpf.getSize());
 
-			imageDto.setImageName(imageName);
-			imageDto.setImagePath(imagePath);
-			imageDto.setImageUUID(imageUUID);
+			imageDto.setImg_name(imageName);
+			imageDto.setImg_path(imagePath);
+			imageDto.setImg_UUID(imageUUID);
 
 			try {
 				mpf.transferTo(saveImage);

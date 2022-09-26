@@ -43,11 +43,11 @@ public class mapperTest {
 		productVO.setReg_date(LocalDateTime.now());
 		
 		ImageDTO imageDTO = new ImageDTO();
-		imageDTO.setImageName("imageName");
-		imageDTO.setImagePath("imagePath");
-		imageDTO.setImageUUID("imageUUID");
-		imageDTO.setImageParent("imageParent");
-		imageDTO.setParentType("p");
+		imageDTO.setImg_name("imageName");
+		imageDTO.setImg_path("imagePath");
+		imageDTO.setImg_UUID("imageUUID");
+		imageDTO.setParent_num("imageParent");
+		imageDTO.setParent_type("p");
 				
 //		mapper.readCategory().forEach(i->System.out.println(i));
 //		mapper.readLargeCategory().forEach(i->System.out.println(i));
@@ -56,6 +56,9 @@ public class mapperTest {
 //		mapper.readDetailCategory(228).forEach(i->System.out.println(i));
 //		System.out.println(productVO);
 //		pMapper.productRegister(productVO);
-		iMapper.imageRegister(imageDTO);
+//		System.out.println(productVO.getP_num());
+//		iMapper.imageRegister(imageDTO);
+//		pMapper.productDisplay("p202209260021");
+		iMapper.imageDisplay("p202209260021").forEach(i->System.out.println(i.getImg_path().replace("\\", "/")));
 	}
 }
