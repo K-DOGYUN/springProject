@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import web.shoppingmall.domain.CategoryVO;
@@ -20,11 +21,11 @@ import web.shoppingmall.service.IncludesService;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class mapperTest {
- 	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private IncludesMapper mapper;
- 	@Autowired
+	@Autowired
  	private ProductMapper pMapper;
- 	@Autowired
+	@Autowired
  	private ImageMapper iMapper;
 	
 	@Test
