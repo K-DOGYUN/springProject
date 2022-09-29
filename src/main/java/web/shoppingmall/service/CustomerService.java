@@ -1,7 +1,7 @@
-package web.shoppingmall.mapper;
+package web.shoppingmall.service;
 
 import web.shoppingmall.domain.CustomerVO;
 
-public interface CumtomerMapper {
+public interface CustomerService {
 	public void customerRegister(CustomerVO customerVO);
 }
