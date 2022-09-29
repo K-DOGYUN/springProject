@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="web.shoppingmall.mapper.CustomerMapper">
+	<resultMap type="web.shoppingmall.domain.CustomerVO" id="CustomerMap">
+		<id property="customerId" column="customer_id"/>
+		<result property="customerId" column="customer_id"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="customerPhone" column="customer_phone"/>
+		<result property="customerState" column="custoemr_state"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	
+	<insert id="customerRegister">
+		INSERT INTO customer (
+		    customer_id,
+		    customer_pw,
+		    customer_name,
+		    customer_phone
+		) VALUES (
+		    #{customerId},
+		    #{customerPw},
+		    #{customerName},
+		    #{customerPhone}
+		)
+	</insert>
+</mapper>
