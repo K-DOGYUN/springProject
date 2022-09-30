@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="web.shoppingmall.mapper.AddressMapper">
+	<insert id="AddrRegistration">
+		<selectKey keyProperty="addrNo" resultType="String" order="BEFORE">
+			SELECT
+			    'a'
+			    || to_char(sysdate, 'YYYYMMDD')
+			    || substr(addr_seq.NEXTVAL + 10000, 2)
+			FROM
+			    dual
+		</selectKey>
+		INSERT INTO address (
+		    addr_num,
+		    addr_main,
+		    addr_detail,
+		    addr_zipno,
+		    customer_id
+		) VALUES (
+		    #{addrNo},
+		    #{mainAddr},
+		    #{detailAddr},
+		    #{zipNo},
+		    #{customerId}
+		)
+	</insert>
+</mapper>

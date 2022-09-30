@@ -1,6 +1,7 @@
 package web.shoppingmall.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,4 +15,6 @@ public class CustomerVO {
 	private Date regDate;
 	private Date updateDate;
 	private String auth;
+	
+	private List<AddressDTO> addrList;
 }

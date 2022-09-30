@@ -61,6 +61,16 @@
 	                                            	oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                 								</div>
                 							</div>
+                							<div class="form-group" id="address">
+                								<div class="row">
+                									<div class="col-lg-6">
+		                								<label>address</label>
+                									</div>
+                									<div class="col-lg-6">
+			                							<button type="button" class="btn btn-default btn-xs pull-right" onclick="goPopup()">주소 추가</a>
+                									</div>
+                								</div>               								
+                							</div>
                 							<button type="button" id="SubmitButton" class="btn btn-default">Submit</button>
                 							<button type="reset" class="btn btn-default">Reset</button>
                 						</form>
@@ -115,6 +125,119 @@
         			
         			$("form[role='form']").submit();
         		});
+	          	
+	          	
         	});
+        	function goPopup(){
+          		// 주소검색을 수행할 팝업 페이지를 호출합니다.
+          		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+          		var pop = window.open("../includes/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+          		
+          		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+          	    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+          	}
+        	var addrCount = 0;
+        	function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+      			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+      			var addrRow = document.createElement("div");
+      			addrRow.setAttribute("class", "row addr["+addrCount+"]");
+      			
+      			var addrCol = document.createElement("div");
+      			addrCol.setAttribute("class", "col-lg-6");
+      			
+      			var addrLabel = document.createElement("label");
+      			addrLabel.append("주소"+(addrCount+1));
+      			
+      			var addrButton = document.createElement("button");
+      			addrButton.setAttribute("class", "btn btn-default btn-xs pull-right");
+      			addrButton.append("삭제");
+      			
+      			addrCol.append(addrLabel);
+      			addrRow.append(addrCol);
+      			
+      			var addrCol = document.createElement("div");
+      			addrCol.setAttribute("class", "col-lg-6");
+      			
+      			addrCol.append(addrButton);
+      			addrRow.append(addrCol);
+      			$("#address").append(addrRow);
+      			
+        		var inputGroup= document.createElement("div");
+    			inputGroup.setAttribute("class", "input-group addr["+addrCount+"]");
+    			
+        		var inputAddon = document.createElement("span");
+        		inputAddon.setAttribute("class", "input-group-addon");
+        		
+        		var inputAddr = document.createElement("input");
+    			inputAddr.setAttribute("class", "form-control");
+    			inputAddr.setAttribute("type", "text");
+        		inputAddr.setAttribute("name", "addrList["+addrCount+"].mainAddr");
+        		inputAddr.setAttribute("value", roadAddrPart1+roadAddrPart2);
+        		
+        		inputAddon.append("주소");
+        		inputGroup.append(inputAddon);
+        		inputGroup.append(inputAddr);
+        		
+        		$("#address").append(inputGroup);
+    			
+        		var inputGroup= document.createElement("div");
+    			inputGroup.setAttribute("class", "input-group addr["+addrCount+"]");
+    			
+        		var inputAddon = document.createElement("span");
+        		inputAddon.setAttribute("class", "input-group-addon");
+        		
+        		var inputAddr = document.createElement("input");
+    			inputAddr.setAttribute("class", "form-control");
+    			inputAddr.setAttribute("type", "text");
+        		inputAddr.setAttribute("name", "addrList["+addrCount+"].detailAddr");
+        		inputAddr.setAttribute("value", addrDetail);
+        		
+        		inputAddon.append("상세주소");
+        		inputGroup.append(inputAddon);
+        		inputGroup.append(inputAddr);
+        		
+        		$("#address").append(inputGroup);
+    			
+        		var inputGroup= document.createElement("div");
+    			inputGroup.setAttribute("class", "input-group addr["+addrCount+"]");
+    			
+        		var inputAddon = document.createElement("span");
+        		inputAddon.setAttribute("class", "input-group-addon");
+        		
+        		var inputAddr = document.createElement("input");
+    			inputAddr.setAttribute("class", "form-control");
+    			inputAddr.setAttribute("type", "text");
+        		inputAddr.setAttribute("name", "addrList["+addrCount+"].zipNo");
+        		inputAddr.setAttribute("value", zipNo);
+        		
+        		inputAddon.append("우편번호");
+        		inputGroup.append(inputAddon);
+        		inputGroup.append(inputAddr);
+        		
+        		$("#address").append(inputGroup);
+    			
+    			addrCount ++;
+      		}
         </script>
+												<!-- 
+												<div class="row">
+                									<div class="col-lg-6">
+		                								<label>address</label>
+                									</div>
+                									<div class="col-lg-6">
+			                							<button type="button" class="btn btn-default btn-xs pull-right" onclick="goPopup()">주소 추가</a>
+                									</div>
+                								</div> 
+												<div class="input-group">
+	                								<span class="input-group-addon">주소</span>
+	                								<input class="form-control" type="text" id="roadAddr"/>
+                								</div>
+                								<div class="input-group">
+	                								<span class="input-group-addon">상세주소</span>
+	                								<input class="form-control" type="text" id="addrDetail"/>
+                								</div>
+	                							<div class="input-group">
+	                								<span class="input-group-addon">우편번호</span>
+	                								<input class="form-control" type="text" id="zipNo"/>
+	                							</div>  -->
 <%@ include file="../includes/footer.jsp" %>
