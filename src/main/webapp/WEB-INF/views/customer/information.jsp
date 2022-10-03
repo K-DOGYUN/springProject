@@ -16,6 +16,8 @@
                		<div class="panel panel-default">
                			<div class="panel-heading">
                				${information.customerName}님의 정보
+               				<button type="button" class="btn btn-default btn-xs pull-right" onclick="openModal()">삭제하기</button>
+               				<button type="button" class="btn btn-default btn-xs pull-right" onclick="modify()">수정하기</button>
                			</div>
                			<div class="panel-body">
                				<div class="list-group">
@@ -24,6 +26,9 @@
                					<span class="list-group-item">휴대폰 번호 : ${information.customerPhone}</span>
                					<span class="list-group-item">가입일 : <fmt:formatDate value='${information.regDate}' pattern='yyyy.MM.dd HH:mm:ss'/></span>
                					<span class="list-group-item">최종 수정일 : <fmt:formatDate value='${information.updateDate}' pattern='yyyy.MM.dd HH:mm:ss'/></span>
+               					<c:if test="${not empty information.businessNo}">
+	               					<span class="list-group-item">사업자 번호 : ${information.businessNo}</span>
+               					</c:if>
                				</div>
                			</div>
                		</div>
@@ -38,10 +43,36 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
+        <!-- modal -->
+		<div id="deleteModal" class="modal fade col-lg-6 col-lg-offset-3" role="dialong" tabindex="-1" aria-hidden="true"
+			style="margin-top: 25%">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>계정삭제</h4>
+				</div>
+				<form role="form">
+					<div class="modal-body">
+						<div class="form-group">
+							<label>계정을 삭제하기위해 비밀번호를 입력해주십시오.</label>
+							<input class="form-control" type="password" name="customerPw"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-sm pull-right" onclick="closeModal()">닫기</button>
+               			<button type="button" class="btn btn-default btn-sm pull-right" onclick="deleteCustomer()">삭제</button>
+					</div>
+				</form>
+			</div>
+		</div>
+        <!-- modal -->
         <script type="text/javascript">
         	console.log('${information}');
         	console.log('${customerId}');
         	$(document).ready(function() {
+        		<c:if test="${empty information}">
+        			alert("존재하지 않는 회원입니다.");
+        			location.href = "/main";
+        		</c:if>
 		        <c:forEach items="${information.addrList}" var="addrList" varStatus="stat">
 	        		<c:if test="${not empty addrList.mainAddr}">
 			        	var panelBody = document.createElement("div");
@@ -88,7 +119,7 @@
 			        	panelBody.append(listGroup);
 			        	$(".addr").append(panelBody);
 	        		</c:if>
-		        </c:forEach>        		
+		        </c:forEach>
         	});
         	function goPopup(){
           		// 주소검색을 수행할 팝업 페이지를 호출합니다.
@@ -199,6 +230,39 @@
 						$("div[class='panel-body "+e+"']").remove();
 					}
 				});
+        	}
+        	function modify() {
+        		location.href="correction?customerId=${customerId}";
+        	}
+        	function openModal() {
+        		$("#deleteModal").modal("show");
+        	}
+        	function closeModal() {
+        		$("#deleteModal").modal("hide");
+        	}
+        	function deleteCustomer() {
+        		$.ajax({
+        			url : '/customer/confirm',
+        			data : {customerId : "${customerId}",
+        				customerPw : $("input[name='customerPw']").val()},
+        			dataType : 'text',
+        			type : 'post',
+        			success : function(result) {
+        				console.log(result);
+        				if (result === "correct") {
+        					$.ajax({
+        						url : '/customer/delete',
+        						data : {customerId : "${customerId}"},
+        						dataType : 'text',
+        						type : 'post',
+        						success : function(result) {
+        							alert(result);
+        							location.href = "/main";
+        						}
+        					});
+        				}
+        			}
+        		});
         	}
         </script>
 <%@ include file="../includes/footer.jsp" %>

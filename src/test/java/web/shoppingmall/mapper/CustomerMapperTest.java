@@ -60,6 +60,7 @@ public class CustomerMapperTest {
 //		customerVO.getAddrList().forEach(addr -> System.out.println(addr));
 //		customerVO.getAddrList().forEach(addr -> addrMapper.AddrRegistration(addr));
 //		System.out.println(mapper.customerInformation("aefdaf002@naver.com"));
-		mapper.customerCorrection(customerVO);
+//		mapper.customerCorrection(customerVO);
+		mapper.customerDelete("20221003002@naver.com");
 	}
 }

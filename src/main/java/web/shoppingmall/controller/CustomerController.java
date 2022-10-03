@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import web.shoppingmall.domain.CustomerVO;
@@ -24,15 +25,17 @@ public class CustomerController {
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 
-	@GetMapping({ "/register" })
-	public void customerRegister() {
-		System.out.println("register");
+	@GetMapping({ "/register", "/delete", "/confirm" })
+	public void voidGetMap() {
 	}
 
 	@PostMapping({ "/register" })
-	public String customerRegisterPost(CustomerVO customerVO, RedirectAttributes rttr) {
+	public String customerRegister(CustomerVO customerVO, RedirectAttributes rttr) {
 		String encodedPw = pwEncoder.encode(customerVO.getCustomerPw());
 		customerVO.setCustomerPw(encodedPw);
+		if (customerVO.getBusinessNo() > 999999999) {
+			customerVO.setAuth("Seller");			
+		}
 		System.out.println("Customer registration(customerVO) : " + customerVO);
 		cService.customerRegister(customerVO);
 		
@@ -50,10 +53,43 @@ public class CustomerController {
 		return "redirect:/customer/information";
 	}
 	
-	@GetMapping({"/information"})
+	@PostMapping({ "/correction" })
+	public String customerCorrection(CustomerVO customerVO, RedirectAttributes rttr) {
+		String encodedPw = pwEncoder.encode(customerVO.getCustomerPw());
+		customerVO.setCustomerPw(encodedPw);
+		System.out.println("Customer Correction(customerVO) : " + customerVO);
+		
+		cService.customerCorrection(customerVO);
+		
+		rttr.addAttribute("customerId",customerVO.getCustomerId());
+		return "redirect:/customer/information";
+	}
+	
+	@GetMapping({"/information", "/correction"})
 	public void customerInformation(String customerId, Model model) {
 		System.out.println("information : "+customerId);
 		model.addAttribute("customerId", customerId);
 		model.addAttribute("information",cService.customerInformation(customerId));
+	}
+	
+	@PostMapping({"/delete"})
+	@ResponseBody
+	public String customerDelete(String customerId) {
+		System.out.println("customerDelete : " + customerId);
+		cService.customerDelete(customerId);
+		return "deleted";
+	}
+	
+	@PostMapping({"/confirm"})
+	@ResponseBody
+	public String customerConfirm(CustomerVO customerVO) {
+		System.out.println("confirm : " + customerVO);
+		CustomerVO originCustomer = cService.customerInformation(customerVO.getCustomerId());
+		System.out.println("confirm : " + originCustomer);
+		
+		if(pwEncoder.matches(customerVO.getCustomerPw(), originCustomer.getCustomerPw()))
+			return "correct";
+		else
+			return "different";
 	}
 }

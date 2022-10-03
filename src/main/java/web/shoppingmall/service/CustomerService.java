@@ -6,4 +6,5 @@ public interface CustomerService {
 	public void customerRegister(CustomerVO customerVO);
 	public CustomerVO customerInformation(String customerId);
 	public void customerCorrection(CustomerVO customerVO);
+	public void customerDelete(String customerId);
 }

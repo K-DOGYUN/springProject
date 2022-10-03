@@ -15,6 +15,7 @@ public class CustomerVO {
 	private Date regDate;
 	private Date updateDate;
 	private String auth;
+	private int businessNo;
 	
 	private List<AddressDTO> addrList;
 }

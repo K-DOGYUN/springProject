@@ -14,6 +14,7 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="auth" column="auth"/>
+		<result property="businessNo" column="business_number"/>
 		<collection property="addrList" resultMap="addrMap"></collection>
 	</resultMap>
 	<resultMap type="web.shoppingmall.domain.AddressDTO" id="addrMap">
@@ -31,18 +32,22 @@
 		    customer_id,
 		    customer_pw,
 		    customer_name,
-		    customer_phone
+		    customer_phone,
+		    auth,
+		    business_number
 		) VALUES (
 		    #{customerId},
 		    #{customerPw},
 		    #{customerName},
-		    #{customerPhone}
+		    #{customerPhone},
+		    #{auth},
+		    #{businessNo}
 		)
 	</insert>
 	<select id="customerInformation" resultMap="customerMap">
 		<![CDATA[
 			SELECT
-			    c.customer_id
+			    c.customer_id,
 			    customer_pw,
 			    customer_name,
 			    customer_phone,
@@ -50,6 +55,7 @@
 			    c.reg_date,
 			    c.update_date,
 			    auth,
+			    business_number,
 			    addr_num,
 			    addr_main,
 			    addr_detail,
@@ -77,4 +83,7 @@
 		WHERE
 		    customer_id = #{customerId}
 	</update>
+	<delete id="customerDelete">
+		delete from customer where customer_id = #{customerId}
+	</delete>
 </mapper>

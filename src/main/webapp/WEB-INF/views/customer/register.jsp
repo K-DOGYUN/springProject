@@ -61,6 +61,11 @@
 	                                            	oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                 								</div>
                 							</div>
+                							<div class="form-group">
+                								<label>business number</label>
+                								<input class="form-control" type="text" name="businessNo" maxlength="10"
+                								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                							</div>
                 							<div class="form-group" id="address">
                 								<div class="row">
                 									<div class="col-lg-6">
@@ -92,6 +97,7 @@
         			const regEmail = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/;//이메일
         			const regPW = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;//비밀번호 8자 이상 숫자,소문자,대문자 각1개이상포함
         			const regPhone = /[0-9]{4}/;
+        			const regBNo = /[0-9]{10}/;
         			
         			if (regEmail.test($("input[name='customerId']").val()) != true) {
         				alert("이메일 형식에 맞게 입력해 주세요");
@@ -112,6 +118,14 @@
         				$("input[name='phone3']").focus();
         				return false;
         			}//휴대폰 번호 유효성 검사
+        			
+        			if ($("input[name='businessNo']").val() !== null) {
+	        			if (regBNo.test($("input[name='businessNo']").val()) != true) {
+	        				alert("숫자 열자리를 정확하게 입력해주십시오. 사업자 번호가 없다면 공란으로 비워주십시오")
+	        				$("input[name='businessNo']").focus();
+	        				return false;
+	        			}     				
+        			}//사업자 번호 유효성 검사
         			        			
         			var Phone = $("select[name='phone1']").val()
         				+ "-" + $("input[name='phone2']").val()

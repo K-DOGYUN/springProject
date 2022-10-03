@@ -26,4 +26,9 @@ public class CustomerServiceImpl implements CustomerService{
 		mapper.customerCorrection(customerVO);
 	}
 
+	@Override
+	public void customerDelete(String customerId) {
+		mapper.customerDelete(customerId);		
+	}
+
 }
