@@ -5,11 +5,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	<bean id="AccessDeniedHandler" class="web.shoppingmall.security.CustomAccessDeniedHandler"></bean>
 	<security:http>
+		<security:intercept-url pattern="/sample/all" access="permitAll"/>
+		<security:intercept-url pattern="/sample/customer" access="hasRole('ROLE_CUSTOMER')"/>
+		<security:intercept-url pattern="/sample/seller" access="hasRole('ROLE_SELLER')"/>
+		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+		<security:access-denied-handler ref="AccessDeniedHandler"/>
 		<security:form-login/>
 	</security:http>
 	
 	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="customer" password="{noop}1234" authorities="ROLE_CUSTOMER"/>
+				<security:user name="seller" password="{noop}1234" authorities="ROLE_SELLER"/>
+				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
 	</security:authentication-manager>
 
 </beans>

@@ -1,5 +1,6 @@
 package web.shoppingmall.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +30,10 @@ public class IncludesController {
 	@PostMapping({"/includes/jusoPopup"})
 	public void addressTestPost() {
 		
+	}
+	
+	@GetMapping("/accessDenied")
+	public void accessDenied(Authentication auth) {
+		System.out.println("access denied : " + auth);
 	}
 }
