@@ -6,8 +6,11 @@ CREATE TABLE customer (
     customer_state CHAR(1) DEFAULT 1,
     reg_date       DATE DEFAULT sysdate,
     update_date    DATE DEFAULT sysdate,
-    auth           VARCHAR2(8) DEFAULT 'customer'
+    auth           VARCHAR2(8) DEFAULT 'customer',
+    business_number number(10)
 );
+
+ALTER TABLE customer ADD business_number number(10);
 
 ALTER TABLE customer ADD auth VARCHAR2(8) DEFAULT 'customer';
 
@@ -19,7 +22,8 @@ FROM
 CREATE SEQUENCE addr_seq MINVALUE 0 MAXVALUE 9999;
 
 SELECT
-    c.customer_id    customer_pw,
+    c.customer_id,
+    customer_pw,
     customer_name,
     customer_phone,
     customer_state,
@@ -63,4 +67,12 @@ WHERE
     c.customer_id = 'aefdaf002@naver.com'
 ORDER BY
     addr_num ASC;
-    
+
+UPDATE customer
+SET
+    customer_pw = '1',
+    customer_name= 'aaa',
+    customer_phone= '010-2222-2222',
+    update_date = sysdate
+WHERE
+    customer_id = 'aefawf@naver.com';
