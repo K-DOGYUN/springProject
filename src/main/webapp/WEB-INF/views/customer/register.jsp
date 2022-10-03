@@ -67,7 +67,7 @@
 		                								<label>address</label>
                 									</div>
                 									<div class="col-lg-6">
-			                							<button type="button" class="btn btn-default btn-xs pull-right" onclick="goPopup()">주소 추가</a>
+			                							<button type="button" class="btn btn-default btn-xs pull-right" onclick="goPopup()">주소 추가</button>
                 									</div>
                 								</div>               								
                 							</div>
@@ -125,8 +125,6 @@
         			
         			$("form[role='form']").submit();
         		});
-	          	
-	          	
         	});
         	function goPopup(){
           		// 주소검색을 수행할 팝업 페이지를 호출합니다.
@@ -136,6 +134,13 @@
           		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
           	    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
           	}
+        	
+        	function deleteAddr(num) {
+        		console.log("deleteAddr : "+num);
+        		$("div[class='input-group addr["+num+"]']").remove();
+        		$("div[class='row addr["+num+"]']").remove();
+        	}
+        	
         	var addrCount = 0;
         	function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
       			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
@@ -150,11 +155,11 @@
       			
       			var addrButton = document.createElement("button");
       			addrButton.setAttribute("class", "btn btn-default btn-xs pull-right");
+      			addrButton.setAttribute("type", "button");
+      			addrButton.setAttribute("onclick", "deleteAddr("+addrCount+")")
       			addrButton.append("삭제");
-      			
       			addrCol.append(addrLabel);
       			addrRow.append(addrCol);
-      			
       			var addrCol = document.createElement("div");
       			addrCol.setAttribute("class", "col-lg-6");
       			

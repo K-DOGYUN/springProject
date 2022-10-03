@@ -1,7 +1,6 @@
 package web.shoppingmall.mapper;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,17 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 import web.shoppingmall.domain.CategoryVO;
 import web.shoppingmall.domain.ImageDTO;
 import web.shoppingmall.domain.ProductVO;
-import web.shoppingmall.service.IncludesService;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-@Log4j
 public class mapperTest {
 	@Autowired
 	private IncludesMapper mapper;
@@ -30,7 +24,6 @@ public class mapperTest {
 	
 	@Test
 	public void testMapper() {
-		CategoryVO vo = new CategoryVO();
 		ProductVO productVO = new ProductVO();
 		productVO.setCategory_num(2491);
 		productVO.setDeliv_fee(2000);

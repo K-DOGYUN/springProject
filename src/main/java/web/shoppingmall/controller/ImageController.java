@@ -45,7 +45,7 @@ public class ImageController {
 
 	@PostMapping(value = "/imageUpload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<ImageDTO>> imageUpload(MultipartFile[] uploadImage) throws Exception {
+	public List<ImageDTO> imageUpload(MultipartFile[] uploadImage) throws Exception {
 		List<ImageDTO> list = new ArrayList<ImageDTO>();
 
 		// make uploadPath
@@ -81,15 +81,25 @@ public class ImageController {
 			try {
 				mpf.transferTo(saveImage);
 				FileOutputStream thumbnail = new FileOutputStream(
-						new File(imageFolderPath, "s_" + imageUUID + "_" + imageName));
+						new File(imageFolderPath, "s_" + imageUUID + "_" + imageName)
+				);
+				FileOutputStream sThumbnail = new FileOutputStream(
+						new File(imageFolderPath, "ss_" + imageUUID + "_" + imageName)
+				);
 				Thumbnailator.createThumbnail(mpf.getInputStream(), thumbnail, 200, 200);
+				Thumbnailator.createThumbnail(mpf.getInputStream(), sThumbnail, 20, 20);
+				
 				thumbnail.close();
+				sThumbnail.close();
 				list.add(imageDto);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+			
+//			File sThumbnail = new File(imageFolderPath, "ss_" + imageUUID + "_" + imageName);
 		}
-		return new ResponseEntity<>(list, HttpStatus.OK);
+		System.out.println("list : " + list);
+		return list;
 	}
 
 	@GetMapping("/showImage")

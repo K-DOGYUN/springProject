@@ -29,7 +29,7 @@
                 			</div>
                 			<div class="panel-body">
                 				<div class="list-group">
-                					<span class="list-group-item"><h1>${productVO.p_price}원</h1></span>
+                					<span class="list-group-item">${productVO.p_price}원</span>
                 					<span class="list-group-item">배송비 : ${productVO.deliv_fee}원</span>
                 					<span class="list-group-item">제조사 : ${productVO.manufac_num}</span>
                 					<span class="list-group-item">상태 : ${productVO.p_stat}</span>

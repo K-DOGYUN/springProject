@@ -191,9 +191,16 @@
 						}// imgCheck
 						
 						function showImage(result) {
-							console.log("showImage")
+							console.log("showImage");
+							console.log(result);
+							var array = new Array();
+							result.forEach(function(e) {
+								console.log(e);
+							})
 							$(result).each(function(i, obj) {
-								var callPath = encodeURIComponent(obj.imagePath + "/s_" + obj.imageUUID + "_" + obj.imageName);
+								console.log(obj);
+								var callPath = encodeURIComponent(obj.img_path + "/s_" + obj.img_UUID + "_" + obj.img_name);
+								console.log(callPath);
 								$("#thumnails").append(
 									"<div><img src='/showImage?path="
 									+ callPath

@@ -16,4 +16,14 @@ public class CustomerServiceImpl implements CustomerService{
 		mapper.customerRegister(customerVO);
 	}
 
+	@Override
+	public CustomerVO customerInformation(String customerId) {
+		return mapper.customerInformation(customerId);
+	}
+
+	@Override
+	public void customerCorrection(CustomerVO customerVO) {
+		mapper.customerCorrection(customerVO);
+	}
+
 }

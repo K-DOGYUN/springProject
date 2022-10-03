@@ -4,12 +4,23 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="web.shoppingmall.mapper.AddressMapper">
+	<resultMap type="web.shoppingmall.domain.AddressDTO" id="addrMap">
+		<result property="addrNo" column="addr_num"/>
+		<result property="mainAddr" column="addr_main"/>
+		<result property="detailAddr" column="addr_detail"/>
+		<result property="zipNo" column="addr_zipno"/>
+		<result property="customerId" column="customer_id"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
 	<insert id="AddrRegistration">
-		<selectKey keyProperty="addrNo" resultType="String" order="BEFORE">
+		<selectKey keyColumn="addr_no" keyProperty="addrNo"	resultType="String" order="BEFORE">
 			SELECT
 			    'a'
 			    || to_char(sysdate, 'YYYYMMDD')
-			    || substr(addr_seq.NEXTVAL + 10000, 2)
+			    || substr(addr_seq.NEXTVAL + 10000, 2) as addr_no,
+			    sysdate as reg_date,
+			    sysdate as update_date
 			FROM
 			    dual
 		</selectKey>
@@ -27,4 +38,17 @@
 		    #{customerId}
 		)
 	</insert>
+	<select id="addrInformation" resultMap="addrMap">
+		<![CDATA[
+			SELECT
+			    *
+			FROM
+			    address
+			WHERE
+			    addr_num = #{addrNo}
+		]]>
+	</select>
+	<delete id="addrDelete">
+		DELETE from address where addr_num = #{addrNo}
+	</delete>
 </mapper>

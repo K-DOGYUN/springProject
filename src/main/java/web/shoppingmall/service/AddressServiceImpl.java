@@ -15,4 +15,14 @@ public class AddressServiceImpl implements AddressService{
 	public void AddrRegistration(AddressDTO addressDTO) {
 		mapper.AddrRegistration(addressDTO);
 	}
+
+	@Override
+	public AddressDTO addrInfromation(String addrNo) {
+		return mapper.addrInformation(addrNo);
+	}
+
+	@Override
+	public void addrDelete(String addrNo) {
+		mapper.addrDelete(addrNo);		
+	}
 }

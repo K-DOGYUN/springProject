@@ -11,7 +11,7 @@ public class CustomerVO {
 	private String customerPw;
 	private String customerName;
 	private String customerPhone;
-	private String customerState;
+	private int customerState;
 	private Date regDate;
 	private Date updateDate;
 	private String auth;

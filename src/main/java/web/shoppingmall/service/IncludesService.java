@@ -2,8 +2,6 @@ package web.shoppingmall.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import web.shoppingmall.domain.CategoryVO;
 
 public interface IncludesService {

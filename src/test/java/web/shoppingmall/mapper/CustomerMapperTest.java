@@ -33,7 +33,7 @@ public class CustomerMapperTest {
 		AddressDTO addressDTO2 = new AddressDTO();
 		List<AddressDTO> addrList = new ArrayList<AddressDTO>();
 		
-		customerVO.setCustomerId("customer10@naver.com");
+		customerVO.setCustomerId("aefdaf002@naver.com");
 		customerVO.setCustomerPw(encoder.encode("1234"));
 		customerVO.setCustomerName("customerName");
 		customerVO.setCustomerPhone("111-1111-1111");
@@ -56,8 +56,10 @@ public class CustomerMapperTest {
 		System.out.println(customerVO.getCustomerId());
 		customerVO.setAddrList(addrList);
 		
-		mapper.customerRegister(customerVO);
-		customerVO.getAddrList().forEach(addr -> System.out.println(addr));
-		customerVO.getAddrList().forEach(addr -> addrMapper.AddrRegistration(addr));
+//		mapper.customerRegister(customerVO);
+//		customerVO.getAddrList().forEach(addr -> System.out.println(addr));
+//		customerVO.getAddrList().forEach(addr -> addrMapper.AddrRegistration(addr));
+//		System.out.println(mapper.customerInformation("aefdaf002@naver.com"));
+		mapper.customerCorrection(customerVO);
 	}
 }

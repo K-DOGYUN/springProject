@@ -18,7 +18,7 @@ public class IncludesController {
 	@GetMapping(value = {"includes/menu", "product/register"})
 	public void getCategory(Model model) {
 		System.out.println("getCategory/controller");
-		model.addAttribute("category", service.getCategory());
+//		model.addAttribute("category", service.getCategory());
 	}
 	
 	@GetMapping({"/includes/Sample","/includes/jusoPopup"})
