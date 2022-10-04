@@ -10,7 +10,7 @@
 		<result property="customerPw" column="customer_pw"/>
 		<result property="customerName" column="customer_name"/>
 		<result property="customerPhone" column="customer_phone"/>
-		<result property="customerState" column="custoemr_state"/>
+		<result property="customerState" column="customer_state"/>
 		<result property="regDate" column="reg_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="auth" column="auth"/>
@@ -48,18 +48,18 @@
 		<![CDATA[
 			SELECT
 			    c.customer_id,
-			    customer_pw,
-			    customer_name,
-			    customer_phone,
-			    customer_state,
+			    c.customer_pw,
+			    c.customer_name,
+			    c.customer_phone,
+			    c.customer_state,
 			    c.reg_date,
 			    c.update_date,
-			    auth,
-			    business_number,
-			    addr_num,
-			    addr_main,
-			    addr_detail,
-			    addr_zipno,
+			    c.auth,
+			    c.business_number,
+			    addr.addr_num,
+			    addr.addr_main,
+			    addr.addr_detail,
+			    addr.addr_zipno,
 			    addr.customer_id,
 			    addr.reg_date as addr_reg_date,
 			    addr.update_date as addr_update_date
@@ -79,7 +79,8 @@
 		    customer_pw = #{customerPw},
 		    customer_name= #{customerName},
 		    customer_phone= #{customerPhone},
-		    update_date = sysdate
+		    update_date = sysdate,
+		    auth = #{auth}
 		WHERE
 		    customer_id = #{customerId}
 	</update>

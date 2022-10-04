@@ -6,22 +6,22 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	<bean id="AccessDeniedHandler" class="web.shoppingmall.security.CustomAccessDeniedHandler"></bean>
+	<bean id="SuccessHandler" class="web.shoppingmall.security.CustomAuthenticationSuccessHandler"></bean>
+	<bean id="customUserDetailService" class="web.shoppingmall.security.CustomUserDetailService"></bean>
 	<security:http>
 		<security:intercept-url pattern="/sample/all" access="permitAll"/>
 		<security:intercept-url pattern="/sample/customer" access="hasRole('ROLE_CUSTOMER')"/>
 		<security:intercept-url pattern="/sample/seller" access="hasRole('ROLE_SELLER')"/>
 		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
 		<security:access-denied-handler ref="AccessDeniedHandler"/>
-		<security:form-login/>
+		<security:form-login login-page="/memberLogin" authentication-success-handler-ref="SuccessHandler"/>
+		<security:logout logout-url="/memberLogout" invalidate-session="true"/>
+		<security:csrf disabled="true"/>
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="customer" password="{noop}1234" authorities="ROLE_CUSTOMER"/>
-				<security:user name="seller" password="{noop}1234" authorities="ROLE_SELLER"/>
-				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/>
-			</security:user-service>
+		<security:authentication-provider user-service-ref="customUserDetailService">
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
 

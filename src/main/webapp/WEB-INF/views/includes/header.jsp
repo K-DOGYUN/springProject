@@ -253,7 +253,10 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li>
+                        	<form class="logout" action="/memberLogout" method="post">
+	                        	<a href="#" onclick="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        	</form>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -311,6 +314,9 @@
   				crossorigin="anonymous"></script>
             <script type="text/javascript" src="/resources/js/menu.js"></script>
             <script type="text/javascript">
+            	function logout() {
+            		$(".logout").submit();
+            	}
 	            $(document).ready(function() {
 	            	<c:forEach items="${category}" var="category">
 	                    <c:if test="${category.category_level == 1 }">

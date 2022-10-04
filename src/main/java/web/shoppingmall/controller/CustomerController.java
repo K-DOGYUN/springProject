@@ -34,7 +34,7 @@ public class CustomerController {
 		String encodedPw = pwEncoder.encode(customerVO.getCustomerPw());
 		customerVO.setCustomerPw(encodedPw);
 		if (customerVO.getBusinessNo() > 999999999) {
-			customerVO.setAuth("Seller");			
+			customerVO.setAuth("ROLE_SELLER");			
 		}
 		System.out.println("Customer registration(customerVO) : " + customerVO);
 		cService.customerRegister(customerVO);
@@ -57,6 +57,11 @@ public class CustomerController {
 	public String customerCorrection(CustomerVO customerVO, RedirectAttributes rttr) {
 		String encodedPw = pwEncoder.encode(customerVO.getCustomerPw());
 		customerVO.setCustomerPw(encodedPw);
+		if (customerVO.getBusinessNo() > 999999999) {
+			customerVO.setAuth("ROLE_SELLER");			
+		} else {
+			customerVO.setAuth("ROLE_CUSTOMER");						
+		}
 		System.out.println("Customer Correction(customerVO) : " + customerVO);
 		
 		cService.customerCorrection(customerVO);
