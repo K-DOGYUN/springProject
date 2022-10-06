@@ -32,6 +32,6 @@ public class CommonController {
 	
 	@GetMapping("/main")
 	public void getMain(Model model) {
-		model.addAttribute("category", iService.getCategory());
+//		model.addAttribute("category", iService.getCategory());
 	}
 }
