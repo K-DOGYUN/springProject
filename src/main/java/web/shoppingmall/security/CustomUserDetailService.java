@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import web.shoppingmall.domain.CustomUser;
-import web.shoppingmall.domain.CustomerVO;
 import web.shoppingmall.mapper.CustomerMapper;
 
 public class CustomUserDetailService implements UserDetailsService{
