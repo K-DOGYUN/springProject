@@ -2,6 +2,75 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp" %>
+	<div class="container" style="margin-top: 100px">
+		<div class="container">
+			<h1 class="fs-1 text-center">Customer Registration</h1>
+		</div>
+		<form action="/customer/register" method="post" role="form">
+			<div class="row">
+				<div class="col-lg-6">
+					<label for="customerId" class="form-label mt-2">Email</label>
+					<div class="form-floating">
+						<input type="text" class="form-control" id="customerId" name="customerId" placeholder="Email address for ID"/>
+						<label for="customerId">Email address for ID</label>
+					</div>
+					<label for="customerPw" class="form-label mt-2">Password</label>
+					<div class="form-floating">
+						<input type="password" class="form-control" id="customerPw" name="customerId" placeholder="Password"/>
+						<label for="customerPw">Password</label>
+					</div>
+					<label for="pwConfirm" class="form-label mt-2">Password Confirm</label>
+					<div class="form-floating">
+						<input type="password" class="form-control" id="pwConfirm" name="pwConfirm" placeholder="Rewrite your password"/>
+						<label for="pwConfirm">Rewrite your password</label>
+					</div>
+					<label for="customerName" class="form-label mt-2">Name</label>
+					<div class="form-floating">
+						<input type="text" class="form-control" id="customerName" name="customerName" placeholder="Name"/>
+						<label for="customerName">Name</label>
+					</div>
+					<label for="Contact" class="form-label mt-2">Contact</label>
+					<div class="row">
+						<div class="col">
+							<select class="form-select" aria-label="Default select example" name="phone1">
+								<option>010</option>
+		                        <option>011</option>
+		                        <option>016</option>
+		                        <option>017</option>
+		                        <option>019</option>
+							</select>
+						</div>
+						<div class="col">
+							<input class="form-control" type="text" name="phone2" maxlength="4" id="phone2"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+						</div>
+						<div class="col">
+							<input class="form-control" type="text" name="phone2" maxlength="4" id="phone3"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 mt-2" id="addr">
+					<button type="button" class="d-block btn btn-sm btn-dark m-auto" onclick="goPopup()">주소 추가</button>
+					<div class="container mt-2">
+						<div class="input-group">
+							<span class="input-group-text">주소</span>
+							<input type="text" class="form-control" />
+							<button type="button" class="btn btn-sm btn-dark" onclick>삭제</button>
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">상세주소</span>
+							<input type="text" class="form-control" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">우편번호</span>
+							<input type="text" class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -119,7 +188,7 @@
         				return false;
         			}//휴대폰 번호 유효성 검사
         			
-        			if ($("input[name='businessNo']").val() !== null) {
+        			if ($("input[name='businessNo']").val() != "") {
 	        			if (regBNo.test($("input[name='businessNo']").val()) != true) {
 	        				alert("숫자 열자리를 정확하게 입력해주십시오. 사업자 번호가 없다면 공란으로 비워주십시오")
 	        				$("input[name='businessNo']").focus();
@@ -151,112 +220,75 @@
         	
         	function deleteAddr(num) {
         		console.log("deleteAddr : "+num);
-        		$("div[class='input-group addr["+num+"]']").remove();
-        		$("div[class='row addr["+num+"]']").remove();
+        		$("#addrContainer["+num+"]").remove();
         	}
         	
         	var addrCount = 0;
         	function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-      			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-      			var addrRow = document.createElement("div");
-      			addrRow.setAttribute("class", "row addr["+addrCount+"]");
+      			var container = document.createElement("div");//주소
+      			container.setAttribute("class", "container mt-2");
+      			container.setAttribuet("id", "addrContainer["+addrCount+"]");
       			
-      			var addrCol = document.createElement("div");
-      			addrCol.setAttribute("class", "col-lg-6");
+      			var inputGroup = document.createElement("div");
+      			inputGroup.setAttribuet("class", "input-group");
       			
-      			var addrLabel = document.createElement("label");
-      			addrLabel.append("주소"+(addrCount+1));
+      			var span = document.createElement("span");
+      			span.setAttribute("class", "input-group-text");
+      			span.append("주소");
       			
-      			var addrButton = document.createElement("button");
-      			addrButton.setAttribute("class", "btn btn-default btn-xs pull-right");
-      			addrButton.setAttribute("type", "button");
-      			addrButton.setAttribute("onclick", "deleteAddr("+addrCount+")")
-      			addrButton.append("삭제");
-      			addrCol.append(addrLabel);
-      			addrRow.append(addrCol);
-      			var addrCol = document.createElement("div");
-      			addrCol.setAttribute("class", "col-lg-6");
+      			var input = document.createElement("input");
+      			input.setAttribute("class", "from-control");
+      			input.setAttribute("name", "addrList["+addrCount+"].mainAddr");
+      			input.setAttribute("value", roadAddrPart1+roadAddrPart2);
       			
-      			addrCol.append(addrButton);
-      			addrRow.append(addrCol);
-      			$("#address").append(addrRow);
+      			var button = document.createElement("button");
+      			button.setAttribute("class", "btn btn-sm btn-dark");
+      			button.setAttribute("type", "button");
+      			button.setAttribute("onclick", "deleteAddr("+addrCount+")");
+      			button.append("삭제");
       			
-        		var inputGroup= document.createElement("div");
-    			inputGroup.setAttribute("class", "input-group addr["+addrCount+"]");
-    			
-        		var inputAddon = document.createElement("span");
-        		inputAddon.setAttribute("class", "input-group-addon");
-        		
-        		var inputAddr = document.createElement("input");
-    			inputAddr.setAttribute("class", "form-control");
-    			inputAddr.setAttribute("type", "text");
-        		inputAddr.setAttribute("name", "addrList["+addrCount+"].mainAddr");
-        		inputAddr.setAttribute("value", roadAddrPart1+roadAddrPart2);
-        		
-        		inputAddon.append("주소");
-        		inputGroup.append(inputAddon);
-        		inputGroup.append(inputAddr);
-        		
-        		$("#address").append(inputGroup);
-    			
-        		var inputGroup= document.createElement("div");
-    			inputGroup.setAttribute("class", "input-group addr["+addrCount+"]");
-    			
-        		var inputAddon = document.createElement("span");
-        		inputAddon.setAttribute("class", "input-group-addon");
-        		
-        		var inputAddr = document.createElement("input");
-    			inputAddr.setAttribute("class", "form-control");
-    			inputAddr.setAttribute("type", "text");
-        		inputAddr.setAttribute("name", "addrList["+addrCount+"].detailAddr");
-        		inputAddr.setAttribute("value", addrDetail);
-        		
-        		inputAddon.append("상세주소");
-        		inputGroup.append(inputAddon);
-        		inputGroup.append(inputAddr);
-        		
-        		$("#address").append(inputGroup);
-    			
-        		var inputGroup= document.createElement("div");
-    			inputGroup.setAttribute("class", "input-group addr["+addrCount+"]");
-    			
-        		var inputAddon = document.createElement("span");
-        		inputAddon.setAttribute("class", "input-group-addon");
-        		
-        		var inputAddr = document.createElement("input");
-    			inputAddr.setAttribute("class", "form-control");
-    			inputAddr.setAttribute("type", "text");
-        		inputAddr.setAttribute("name", "addrList["+addrCount+"].zipNo");
-        		inputAddr.setAttribute("value", zipNo);
-        		
-        		inputAddon.append("우편번호");
-        		inputGroup.append(inputAddon);
-        		inputGroup.append(inputAddr);
-        		
-        		$("#address").append(inputGroup);
+      			inputGroup.append(span);
+      			inputGroup.append(input);
+      			inputGroup.append(button);
+      			
+      			container.append(inputGroup);
+      			$("#addr").append(container);//주소
+      			
+      			var container = document.createElement("div");//상세주소
+      			container.setAttribute("class", "container mt-2");
+      			container.setAttribuet("id", "addrContainer["+addrCount+"]");
+      			
+      			var inputGroup = document.createElement("div");
+      			inputGroup.setAttribuet("class", "input-group");
+      			
+      			var span = document.createElement("span");
+      			span.setAttribute("class", "input-group-text");
+      			span.append("주소");
+      			
+      			var input = document.createElement("input");
+      			input.setAttribute("class", "from-control");
+      			input.setAttribute("name", "addrList["+addrCount+"].mainAddr");
+      			input.setAttribute("value", roadAddrPart1+roadAddrPart2);
     			
     			addrCount ++;
       		}
         </script>
 												<!-- 
-												<div class="row">
-                									<div class="col-lg-6">
-		                								<label>address</label>
-                									</div>
-                									<div class="col-lg-6">
-			                							<button type="button" class="btn btn-default btn-xs pull-right" onclick="goPopup()">주소 추가</a>
-                									</div>
-                								</div> 
-												<div class="input-group">
-	                								<span class="input-group-addon">주소</span>
-	                								<input class="form-control" type="text" id="roadAddr"/>
-                								</div>
-                								<div class="input-group">
-	                								<span class="input-group-addon">상세주소</span>
-	                								<input class="form-control" type="text" id="addrDetail"/>
-                								</div>
-	                							<div class="input-group">
-	                								<span class="input-group-addon">우편번호</span>
-	                								<input class="form-control" type="text" id="zipNo"/>
-	                							</div>  -->
+					<div class="col-lg-6 mt-2" id="addr">
+					<button type="button" class="d-block btn btn-sm btn-dark m-auto" onclick="goPopup()">주소 추가</button>
+					<div class="container mt-2">
+						<div class="input-group">
+							<span class="input-group-text">주소</span>
+							<input type="text" class="form-control" />
+							<button type="button" class="btn btn-sm btn-dark" onclick>삭제</button>
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">상세주소</span>
+							<input type="text" class="form-control" />
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">우편번호</span>
+							<input type="text" class="form-control" />
+						</div>
+					</div>  -->
 <%@ include file="../includes/footer.jsp" %>
