@@ -2,27 +2,26 @@ package web.shoppingmall.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import web.shoppingmall.domain.CustomerVO;
-import web.shoppingmall.mapper.CustomerMapper;
+import web.shoppingmall.domain.MemberVO;
+import web.shoppingmall.mapper.MemberMapper;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	@Autowired
-	private CustomerMapper mapper;
+	private MemberMapper mapper;
 	
 	@Override
-	public void customerRegister(CustomerVO customerVO) {
-		mapper.customerRegister(customerVO);
+	public void customerRegister(MemberVO customerVO) {
+		mapper.memberReg(customerVO);
 	}
 
 	@Override
-	public CustomerVO customerInformation(String customerId) {
+	public MemberVO customerInformation(String customerId) {
 		return mapper.customerInformation(customerId);
 	}
 
 	@Override
-	public void customerCorrection(CustomerVO customerVO) {
+	public void customerCorrection(MemberVO customerVO) {
 		mapper.customerCorrection(customerVO);
 	}
 

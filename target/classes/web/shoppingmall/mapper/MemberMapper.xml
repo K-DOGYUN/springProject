@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="web.shoppingmall.mapper.MemberMapper">
+	<insert id="memberReg">
+		<selectKey keyProperty="memberReg" keyColumn="sysdate" resultType="Date" order="BEFORE">
+			SELECT
+			    sysdate
+			FROM
+			    dual
+		</selectKey>
+		INSERT INTO member VALUES (
+			#{memberId},
+			#{memberPw},
+			#{memberName},
+			#{memberPhone},
+			#{auth},
+			1,
+			#{businessNo},
+			#{empNo},
+			#{memberReg},
+			#{memberReg}
+		)
+	</insert>
+</mapper>

@@ -22,12 +22,12 @@ public class AddressTest {
 		dto.setMainAddr("Main Address");
 		dto.setDetailAddr("Detail Address");
 		dto.setZipNo(12345);
-		dto.setCustomerId("20221003002@naver.com");
+		dto.setMemberId("aefdaf002@naver.com");
 		
 //		System.out.println(dto);
 //		
-//		mapper.AddrRegistration(dto);
+		mapper.AddrRegistration(dto);
 //		System.out.println(mapper.addrInformation(dto.getAddrNo()));
-		mapper.addrDelete("a202210030036");
+//		mapper.addrDelete("a202210030036");
 	}
 }

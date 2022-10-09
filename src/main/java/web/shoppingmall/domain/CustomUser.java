@@ -10,28 +10,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class CustomUser implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
-	private String customerId;
-	private String customerPw;
+	private String memberId;
+	private String memberPw;
 	private String auth;
-	private String customerName;
-	private boolean customerState;
+	private String memberName;
+	private boolean memberState;
 	
-	public CustomUser(CustomerVO vo) {
-		this.customerId = vo.getCustomerId();
-		System.out.println(customerId);
-		this.customerPw = vo.getCustomerPw();
-		System.out.println(customerPw);
+	public CustomUser(MemberVO vo) {
+		this.memberId = vo.getMemberId();
+		System.out.println(memberId);
+		this.memberPw = vo.getMemberPw();
+		System.out.println(memberPw);
 		this.auth = vo.getAuth();
 		System.out.println(auth);
-		this.customerName = vo.getCustomerName();
-		System.out.println(customerName);
-		this.customerState = (vo.getCustomerState() != 0);
-		System.out.println(customerState);
-		System.out.println(vo.getCustomerState());
+		this.memberName = vo.getMemberName();
+		System.out.println(memberName);
+		this.memberState = (vo.getMemberState() != 0);
+		System.out.println(memberState);
+		System.out.println(vo.getMemberState());
 	}
 	
 	public String getCustomerName() {
-		return customerName;
+		return memberName;
 	}
 	
 	@Override
@@ -43,12 +43,12 @@ public class CustomUser implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		return customerPw;
+		return memberPw;
 	}
 
 	@Override
 	public String getUsername() {
-		return customerId;
+		return memberId;
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class CustomUser implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return customerState;
+		return memberState;
 	}
 
 }

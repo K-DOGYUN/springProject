@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import web.shoppingmall.domain.CustomerVO;
+import web.shoppingmall.domain.MemberVO;
 import web.shoppingmall.service.AddressService;
 import web.shoppingmall.service.CustomerService;
 
@@ -30,9 +30,9 @@ public class CustomerController {
 	}
 
 	@PostMapping({ "/register" })
-	public String customerRegister(CustomerVO customerVO, RedirectAttributes rttr) {
-		String encodedPw = pwEncoder.encode(customerVO.getCustomerPw());
-		customerVO.setCustomerPw(encodedPw);
+	public String customerRegister(MemberVO customerVO, RedirectAttributes rttr) {
+		String encodedPw = pwEncoder.encode(customerVO.getMemberPw());
+		customerVO.setMemberPw(encodedPw);
 		if (customerVO.getBusinessNo() > 999999999) {
 			customerVO.setAuth("ROLE_SELLER");			
 		}
@@ -43,20 +43,20 @@ public class CustomerController {
 			customerVO.getAddrList().forEach(addr -> {
 				System.out.println("Addr Registration : " + addr);
 				if(addr.getMainAddr() != null) {
-					addr.setCustomerId(customerVO.getCustomerId());
+					addr.setMemberId(customerVO.getMemberId());
 					addrService.AddrRegistration(addr);
 				}
 			});
 		}
 		
-		rttr.addAttribute("customerId",customerVO.getCustomerId());
+		rttr.addAttribute("customerId",customerVO.getMemberId());
 		return "redirect:/customer/information";
 	}
 	
 	@PostMapping({ "/correction" })
-	public String customerCorrection(CustomerVO customerVO, RedirectAttributes rttr) {
-		String encodedPw = pwEncoder.encode(customerVO.getCustomerPw());
-		customerVO.setCustomerPw(encodedPw);
+	public String customerCorrection(MemberVO customerVO, RedirectAttributes rttr) {
+		String encodedPw = pwEncoder.encode(customerVO.getMemberPw());
+		customerVO.setMemberPw(encodedPw);
 		if (customerVO.getBusinessNo() > 999999999) {
 			customerVO.setAuth("ROLE_SELLER");			
 		} else {
@@ -66,7 +66,7 @@ public class CustomerController {
 		
 		cService.customerCorrection(customerVO);
 		
-		rttr.addAttribute("customerId",customerVO.getCustomerId());
+		rttr.addAttribute("customerId",customerVO.getMemberId());
 		return "redirect:/customer/information";
 	}
 	
@@ -87,12 +87,12 @@ public class CustomerController {
 	
 	@PostMapping({"/confirm"})
 	@ResponseBody
-	public String customerConfirm(CustomerVO customerVO) {
+	public String customerConfirm(MemberVO customerVO) {
 		System.out.println("confirm : " + customerVO);
-		CustomerVO originCustomer = cService.customerInformation(customerVO.getCustomerId());
+		MemberVO originCustomer = cService.customerInformation(customerVO.getMemberId());
 		System.out.println("confirm : " + originCustomer);
 		
-		if(pwEncoder.matches(customerVO.getCustomerPw(), originCustomer.getCustomerPw()))
+		if(pwEncoder.matches(customerVO.getMemberPw(), originCustomer.getMemberPw()))
 			return "correct";
 		else
 			return "different";

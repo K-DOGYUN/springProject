@@ -5,10 +5,12 @@ CREATE TABLE address (
     addr_zipno  NUMBER(5) NOT NULL,
     customer_id VARCHAR2(100) NOT NULL
         CONSTRAINT fk_addr
-            REFERENCES customer ( customer_id ),
+            REFERENCES member ( member_id ),
     reg_date    DATE DEFAULT sysdate,
     update_date DATE DEFAULT sysdate
 );
+
+drop table address;
 
 SELECT
     *

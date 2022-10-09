@@ -4,60 +4,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace = "web.shoppingmall.mapper.IncludesMapper">
-	<select id="readLargeCategory" resultType = "web.shoppingmall.domain.CategoryVO">
-		<![CDATA[
-			SELECT
-			    *
-			FROM
-			    category
-			WHERE
-			    category_level = 1
-			ORDER BY
-			    category_name ASC		
-		]]>
-	</select>
-	<select id="readMediumCategory" resultType = "web.shoppingmall.domain.CategoryVO">
-		<![CDATA[
-			SELECT
-			    *
-			FROM
-			    category
-			WHERE
-			        category_level = 2
-			    AND parent_number = #{parentNumber}
-			ORDER BY
-			    category_name ASC
-		]]>
-	</select>
-	<select id="readSmallCategory" resultType = "web.shoppingmall.domain.CategoryVO">
-		<![CDATA[
-			SELECT
-			    *
-			FROM
-			    category
-			WHERE
-			        category_level = 3
-			    AND parent_number = #{parentNumber}
-			ORDER BY
-			    category_name ASC
-		]]>
-	</select>
-	<select id="readDetailCategory" resultType = "web.shoppingmall.domain.CategoryVO">
-		<![CDATA[
-			SELECT
-			    *
-			FROM
-			    category
-			WHERE
-			        category_level = 4
-			    AND parent_number = #{parentNumber}
-			ORDER BY
-			    category_name ASC
-		]]>
-	</select>
 	<select id="readCategory" resultType = "web.shoppingmall.domain.CategoryVO">
 		<![CDATA[
-			SELECT * FROM category ORDER BY category_level, category_name asc
+			SELECT
+			    *
+			FROM
+			    category
+			ORDER BY
+			    large_category,
+			    medium_category,
+			    small_category
 		]]>
 	</select>
 </mapper>

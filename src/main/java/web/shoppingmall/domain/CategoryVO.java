@@ -5,12 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CategoryVO {
 	private int category_number;
-	private String category_name;
-	private int category_level;
-	private String parent_category;
-	private int parent_number;
+	private String large_category;
+	private String medium_category;
+	private String small_category;
+	private String detail_category;
 }

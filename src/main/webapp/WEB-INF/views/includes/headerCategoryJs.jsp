@@ -1,75 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<script type="text/javascript">
-        $(document).ready(function() {
-        	<c:forEach items="${category}" var="category">
-                <c:if test="${category.category_level == 1 }">
-                	console.log("${category.category_name}");
-                	var categoryLi = document.createElement("li");
+		$(document).ready(function() {
+			var largeCate = "";
+			var largeCount = 0;
+			var mediumCate = "";
+			var mediumCount = 100;
+			var smallCate = "";
+			var smallCount = 1000;
+			var detailCate = "";
+			var detailCount = 10000;
+			<c:forEach items="${category}" var="category">//카테고리 불러오기
+            	if (largeCate != "${category.large_category}") {
+            		largeCate = "${category.large_category}";
+            		//console.log("largeCate : " + largeCate);
+            		largeCount++;
+            		
+            		var categoryLi = document.createElement("li");
                 	categoryLi.setAttribute("class", "list-group-item")
                 	
                 	var categoryA = document.createElement("a");
                 	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", "${category.category_number}");
+                	categoryA.setAttribute("id", largeCount);
                 	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0");
                 	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.category_name}");
+                	categoryA.append("${category.large_category}");
                 	
                 	categoryLi.append(categoryA);
                 	
                 	$("#largeCategory").append(categoryLi);
-                </c:if>
-                <c:if test="${category.category_level == 2 }">
-                	console.log("   ${category.category_name}");
-                	var categoryLi = document.createElement("li");
+            	}
+            	if (mediumCate != "${category.medium_category}") {
+            		mediumCate = "${category.medium_category}";
+            		console.log("mediumCate : " + mediumCate);
+            		mediumCount++;
+            		
+            		var categoryLi = document.createElement("li");
                 	categoryLi.setAttribute("class", "list-group-item")
                 	
                 	var categoryA = document.createElement("a");
                 	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", "${category.category_number}");
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-${category.parent_number}");
+                	categoryA.setAttribute("id", mediumCount);
+                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+largeCount);
                 	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.category_name}");
+                	categoryA.append("${category.medium_category}");
                 	
                 	categoryLi.append(categoryA);
                 	
                 	$("#mediumCategory").append(categoryLi);
-                </c:if>
-                <c:if test="${category.category_level == 3 }">
-                	console.log("      ${category.category_name}");
-                	var category = document.createElement("li");
-                	var categoryLi = document.createElement("li");
+            	}
+            	if (smallCate != "${category.small_category}") {
+            		smallCate = "${category.small_category}";
+            		//console.log("smallCate : " + smallCate);
+            		smallCount++;
+            		
+            		var categoryLi = document.createElement("li");
                 	categoryLi.setAttribute("class", "list-group-item")
                 	
                 	var categoryA = document.createElement("a");
                 	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", "${category.category_number}");
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-${category.parent_number}");
+                	categoryA.setAttribute("id", smallCount);
+                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+mediumCount);
                 	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.category_name}");
+                	categoryA.append("${category.small_category}");
                 	
                 	categoryLi.append(categoryA);
                 	
                 	$("#smallCategory").append(categoryLi);
-                </c:if>
-                <c:if test="${category.category_level == 4 }">
-                	console.log("         ${category.category_name}");
-                	var categoryLi = document.createElement("li");
+            	}
+            	if (detailCate != "${category.detail_category}") {
+            		detailCate = "${category.detail_category}";
+            		//console.log("detailCate : " + detailCate);
+            		detailCount++;
+            		
+            		var categoryLi = document.createElement("li");
                 	categoryLi.setAttribute("class", "list-group-item")
                 	
                 	var categoryA = document.createElement("a");
                 	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", "${category.category_number}");
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-${category.parent_number}");
+                	categoryA.setAttribute("id", detailCount);
+                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+smallCount);
                 	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.category_name}");
+                	categoryA.append("${category.detail_category}");
                 	
                 	categoryLi.append(categoryA);
                 	
                 	$("#detailCategory").append(categoryLi);
-                </c:if>
-            </c:forEach>
-            //카테고리 토글
+            	}
+        	</c:forEach>//카테고리 불러오기
+        	
+        	 //카테고리 토글
             $("#largeCategory > li > a").on("mouseover", function(e) {
             	console.log("largeCategoryTouch");
             	$("#mediumCategory > li > a").hide();
@@ -80,7 +100,7 @@
             	$("#mediumCategory > li > a.pNo-" + pNo).show();
             });
             $("#mediumCategory > li > a").on("mouseover", function(e) {
-            	console.log("largeCategoryTouch");
+            	console.log("mediumCategoryTouch");
             	$("#smallCategory > li > a").hide();
             	$("#detailCategory > li > a").hide();
             	var pNo = $(this).attr("id");
@@ -88,7 +108,7 @@
             	$("#smallCategory > li > a.pNo-" + pNo).show();
             });
             $("#smallCategory > li > a").on("mouseover", function(e) {
-            	console.log("largeCategoryTouch");
+            	console.log("smllCategoryTouch");
             	$("#detailCategory > li > a").hide();
             	var pNo = $(this).attr("id");
             	console.log(pNo);
@@ -107,5 +127,5 @@
             		$("#categoryMenu").show();
             	}
             })
-        });
-       </script>
+		})
+	</script>

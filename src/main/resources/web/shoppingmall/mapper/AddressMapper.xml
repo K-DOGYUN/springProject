@@ -9,9 +9,9 @@
 		<result property="mainAddr" column="addr_main"/>
 		<result property="detailAddr" column="addr_detail"/>
 		<result property="zipNo" column="addr_zipno"/>
-		<result property="customerId" column="customer_id"/>
-		<result property="regDate" column="reg_date"/>
-		<result property="updateDate" column="update_date"/>
+		<result property="memberId" column="member_id"/>
+		<result property="addrReg" column="addr_reg"/>
+		<result property="addrUpdate" column="addr_update"/>
 	</resultMap>
 	<insert id="AddrRegistration">
 		<selectKey keyColumn="addr_no" keyProperty="addrNo"	resultType="String" order="BEFORE">
@@ -35,7 +35,7 @@
 		    #{mainAddr},
 		    #{detailAddr},
 		    #{zipNo},
-		    #{customerId}
+		    #{memberId}
 		)
 	</insert>
 	<select id="addrInformation" resultMap="addrMap">

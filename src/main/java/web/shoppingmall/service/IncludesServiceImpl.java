@@ -14,29 +14,6 @@ public class IncludesServiceImpl implements IncludesService{
 	@Setter(onMethod_ = @Autowired)
 	private IncludesMapper mapper;
 
-	@Override
-	public List<CategoryVO> getLargeCategory() {
-		System.out.println("getLargeCategory/serviceImpl");
-		return mapper.readLargeCategory();
-	}
-
-	@Override
-	public List<CategoryVO> getMediumCategory(int parentNumber) {
-		System.out.println("getMediumCategory/serviceImpl"+parentNumber);
-		return mapper.readMediumCategory(parentNumber);
-	}
-
-	@Override
-	public List<CategoryVO> getSmallCategory(int parentNumber) {
-		System.out.println("getSmallCategory/serviceImpl"+parentNumber);
-		return mapper.readSmallCategory(parentNumber);
-	}
-
-	@Override
-	public List<CategoryVO> getDetailCategory(int parentNumber) {
-		System.out.println("getDetailCategory/serviceImpl"+parentNumber);
-		return mapper.readDetailCategory(parentNumber);
-	}
 
 	@Override
 	public List<CategoryVO> getCategory() {

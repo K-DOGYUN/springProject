@@ -10,7 +10,7 @@ public class AddressDTO {
 	private String mainAddr;
 	private String detailAddr;
 	private int zipNo;
-	private String customerId;
-	private Date regDate;
-	private Date updateDate;
+	private String memberId;
+	private Date addrReg;
+	private Date addrUpdate;
 }

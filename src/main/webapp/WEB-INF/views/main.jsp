@@ -41,6 +41,6 @@
 
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<%@ include file="includes/headerCategoryJs.jsp" %>
+	<%@ include file="/WEB-INF/views/includes/headerCategoryJs.jsp" %>
 </body>
 </html>
