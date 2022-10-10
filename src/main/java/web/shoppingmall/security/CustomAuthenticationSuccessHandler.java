@@ -32,7 +32,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 			return;
 		}
 		if(role.contains("ROLE_CUSTOMER")) {
-			response.sendRedirect("/sample/customer");
+			response.sendRedirect("/main");
 			return;
 		}
 		response.sendRedirect("/");

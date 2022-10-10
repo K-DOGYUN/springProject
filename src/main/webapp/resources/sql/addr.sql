@@ -3,11 +3,11 @@ CREATE TABLE address (
     addr_main   VARCHAR2(200) NOT NULL,
     addr_detail VARCHAR2(200),
     addr_zipno  NUMBER(5) NOT NULL,
-    customer_id VARCHAR2(100) NOT NULL
+    member_id VARCHAR2(100) NOT NULL
         CONSTRAINT fk_addr
             REFERENCES member ( member_id ),
-    reg_date    DATE DEFAULT sysdate,
-    update_date DATE DEFAULT sysdate
+    addr_reg    DATE DEFAULT sysdate,
+    addr_update DATE DEFAULT sysdate
 );
 
 drop table address;

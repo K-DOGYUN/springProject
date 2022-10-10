@@ -29,7 +29,7 @@
 		    addr_main,
 		    addr_detail,
 		    addr_zipno,
-		    customer_id
+		    member_id
 		) VALUES (
 		    #{addrNo},
 		    #{mainAddr},

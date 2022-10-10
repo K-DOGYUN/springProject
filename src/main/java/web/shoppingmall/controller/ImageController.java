@@ -74,9 +74,9 @@ public class ImageController {
 			System.out.println(imageUUID);
 			System.out.println(mpf.getSize());
 
-			imageDto.setImg_name(imageName);
-			imageDto.setImg_path(imagePath);
-			imageDto.setImg_UUID(imageUUID);
+			imageDto.setImgName(imageName);
+			imageDto.setImgPath(imagePath);
+			imageDto.setImgUuid(imageUUID);
 
 			try {
 				mpf.transferTo(saveImage);
@@ -128,6 +128,8 @@ public class ImageController {
 			file = new File("C:\\upload\\" + URLDecoder.decode(path, "UTF-8"));
 			file.delete();
 			file = new File("C:\\upload\\" + URLDecoder.decode(path, "UTF-8").replace("s_", ""));
+			file.delete();
+			file = new File("C:\\upload\\" + URLDecoder.decode(path, "UTF-8").replace("s_", "ss_"));
 			file.delete();
 		} catch (Exception e) {
 			e.printStackTrace();

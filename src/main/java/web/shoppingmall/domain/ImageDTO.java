@@ -1,13 +1,16 @@
 package web.shoppingmall.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class ImageDTO {
-	private String img_num;
-	private String img_name;
-	private String img_path;
-	private String img_UUID;
-	private String parent_num;
-	private String parent_type;
+	private String imgNo;
+	private String imgName;
+	private String imgPath;
+	private String imgUuid;
+	private String parentNo;
+	private Date imgReg;
+	private Date imgUpdate;
 }

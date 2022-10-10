@@ -1,4 +1,4 @@
-package web.shoppingmall.controller;
+ package web.shoppingmall.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import web.shoppingmall.service.IncludesService;
 @AllArgsConstructor
 public class IncludesController {
 	private IncludesService service;
-	@GetMapping(value = {"includes/menu", "product/register"})
+	@GetMapping(value = {"includes/menu"})
 	public void getCategory(Model model) {
 		System.out.println("getCategory/controller");
 //		model.addAttribute("category", service.getCategory());

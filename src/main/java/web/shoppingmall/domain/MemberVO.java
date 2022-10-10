@@ -14,7 +14,7 @@ public class MemberVO {
 	private String auth;
 	private int memberState;
 	private int businessNo;
-	private int empNo;
+	private int employeeNo;
 	private Date memberReg;
 	private Date memberUpdate;
 	

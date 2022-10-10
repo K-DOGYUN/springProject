@@ -5,25 +5,27 @@
 	
 <mapper namespace = "web.shoppingmall.mapper.ImageMapper">
 	<insert id="imageRegister">
+		<selectKey keyProperty="imgNo,imgReg,imgUpdate"
+	    	resultType="web.shoppingmall.domain.ImageDTO" order="BEFORE">
+			SELECT
+				'i'
+    			|| to_char(sysdate, 'YYYYMMDD')
+    			|| substr(img_seq.NEXTVAL + 10000, 2) as imgNo,
+				SYSDATE as imgReg,
+				SYSDATE as imgUpdate
+			FROM
+				DUAL
+		</selectKey>
 		<![CDATA[
 			INSERT INTO images VALUES (
-			    'i'
-			    || to_char(sysdate, 'YYYYMMDD')
-			    || substr(img_seq.NEXTVAL + 10000, 2),
-			    #{img_name},
-			    #{img_path},
-			    #{img_uuid},
-			    #{parent_num},
-			    #{parnet_type}
+				#{imgNo},
+				#{imgName},
+				#{imgPath},
+				#{imgUuid},
+				#{parentNo},
+				#{imgReg},
+				#{imgUpdate}
 			)		
 		]]>
 	</insert>
-	<select id="imageDisplay" resultType="web.shoppingmall.domain.ImageDTO">
-		SELECT
-		    *
-		FROM
-		    images
-		WHERE
-		    parent_num = #{parent_num}
-	</select>
 </mapper>

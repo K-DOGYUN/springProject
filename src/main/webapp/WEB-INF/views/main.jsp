@@ -38,7 +38,6 @@
 		</div>
 	</div>
 
-
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<%@ include file="/WEB-INF/views/includes/headerCategoryJs.jsp" %>

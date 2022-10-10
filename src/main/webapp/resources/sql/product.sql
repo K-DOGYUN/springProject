@@ -1,22 +1,27 @@
 CREATE TABLE product (
-    p_num         VARCHAR2(13) PRIMARY KEY,
-    p_name        VARCHAR2(100) NOT NULL,
-    p_stat        VARCHAR2(20) DEFAULT '일반' NOT NULL
-        CONSTRAINT stat_ck CHECK ( p_stat IN ( '일반', '중고', '재생' ) ),
-    p_stock       NUMBER(8) DEFAULT 0 NOT NULL
-        CONSTRAINT stock_ck CHECK ( p_stock >= 0 ),
-    p_price       NUMBER(12) NOT NULL
-        CONSTRAINT price_ck CHECK ( p_price >= 0 ),
-    deliv_fee     NUMBER(12) NOT NULL
-        CONSTRAINT deliv_ck CHECK ( deliv_fee >= 0 ),
-    s_num         VARCHAR2(13) NOT NULL,
-    manufac_num   VARCHAR2(100),
-    category_num  NUMBER(8) NOT NULL
-        CONSTRAINT category_fk
+    product_no     VARCHAR2(100) PRIMARY KEY,
+    product_name   VARCHAR2(100) NOT NULL,
+    manufac_name   VARCHAR2(100) NOT NULL,
+    product_stat   NUMBER(1) NOT NULL,
+    product_stock  NUMBER(10) NOT NULL,
+    product_price  NUMBER(10) NOT NULL,
+    deliv_fee      NUMBER(10) NOT NULL,
+    seller_no      VARCHAR2(100) NOT NULL
+        CONSTRAINT fk1_product
+            REFERENCES member ( member_id ),
+    category_no    NUMBER(8) NOT NULL
+        CONSTRAINT fk2_product
             REFERENCES category ( category_number ),
-    reg_date      DATE NOT NULL,
-    up_date       DATE NOT NULL
+    product_reg    DATE DEFAULT sysdate,
+    product_update DATE DEFAULT sysdate
 );
+
+SELECT
+    *
+FROM
+    product;
+commit;
+DROP TABLE product;
 
 CREATE SEQUENCE p_seq MINVALUE 0 MAXVALUE 9999;
 
@@ -25,13 +30,13 @@ INSERT INTO product VALUES (
     || to_char(sysdate, 'YYYYMMDD')
     || substr(p_seq.NEXTVAL + 10000, 2),
     'product',
-    '일반',
+    '제조사',
+    1,
     100,
     10000,
     2000,
-    's2018',
-    'm77',
-    2491,
+    'seller001@naver.com',
+    '1880102',
     sysdate,
     sysdate
 );
@@ -53,6 +58,6 @@ FROM
 SELECT
     *
 FROM
-    product
+    product p, img i, option o
 WHERE
-    p_num = 'p202209260021';
+    p_num = 'p202210110021';

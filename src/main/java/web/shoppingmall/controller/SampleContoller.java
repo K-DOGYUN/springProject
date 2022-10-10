@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/sample/*")
 public class SampleContoller {
-	@GetMapping({"/all", "/customer", "/seller", "/admin"})
+	@GetMapping({"/all", "/customer", "/seller", "/admin", "/post"})
 	public void voidGetMap() {
 		
 	}

@@ -1,27 +1,26 @@
 package web.shoppingmall.domain;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ProductVO {
-	private String p_num;
-	private String p_name;
-	private String p_stat;
-	private int p_stock;
-	private int p_price;
-	private int deliv_fee;
-	private String s_num;
-	private String manufac_num;
-	private int category_num;
-	private LocalDateTime reg_date;
-	private LocalDateTime up_date;
+	private String productNo;
+	private String productName;
+	private String manufacName;
+	private int productStat;
+	private int productStock;
+	private int productPrice;
+	private int delivFee;
+
+	private String sellerNo;
+	private int categoryNo;
+
+	private Date productReg;
+	private Date productUpdate;
 	
 	private List<ImageDTO> imgList;
+	private List<OptionDTO> optionList;
 }

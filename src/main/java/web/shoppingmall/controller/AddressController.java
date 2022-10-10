@@ -25,8 +25,8 @@ public class AddressController {
 	public AddressDTO AddrRegistration(AddressDTO addressDTO) {
 		System.out.println("AddrRegistration : " + addressDTO);
 		addrService.AddrRegistration(addressDTO);
-		
-		return addrService.addrInfromation(addressDTO.getAddrNo());
+		System.out.println(addressDTO);		
+		return addressDTO;
 	}
 
 	@PostMapping({"/delete"})

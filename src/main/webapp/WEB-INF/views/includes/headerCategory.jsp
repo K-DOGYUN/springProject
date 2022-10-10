@@ -27,20 +27,22 @@
 					<li><a href="#" class="nav-link px-2 text-white">Features</a></li>
 					<li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
 					<li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-					<li><a href="#" class="nav-link px-2 text-white">About</a></li>
+					<li><a href="#" class="nav-link px-2 text-white"></a></li>
 				</ul>
 
 				<div class="text-end">
 					<sec:authorize access="isAnonymous()">
-						<a href="memberLogin" class="btn btn-outline-light me-2">Login</a>
+						<a href="/memberLogin?" class="btn btn-outline-light me-2">Login</a>
 					</sec:authorize>
+					
 					<sec:authorize access="isAuthenticated()">
+						<a href="/member/information?memberId=<sec:authentication property='principal.username'/>" class="btn btn-outline-warning me-2">My-Info</a>
 						<form class="logout d-inline-block" action="/memberLogout" method="post">
 							<button type="submit" onclick="logout()" class="btn btn-outline-light me-2">Logout</button>
 						</form>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
-						<a href="../customer/register" class="btn btn-outline-info">Sign-up</a>
+						<a href="../member/register" class="btn btn-outline-info">Sign-up</a>
 					</sec:authorize>
 				</div>
 			</div>

@@ -4,40 +4,90 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace = "web.shoppingmall.mapper.ProductMapper">
-	<insert id="productRegister">
-		<selectKey keyProperty="p_num" resultType="String" order="BEFORE">
-			<![CDATA[
-				SELECT
-				    'p'
-				    || to_char(sysdate, 'YYYYMMDD')
-				    || substr(p_seq.NEXTVAL + 10000, 2)
-				FROM
-				    dual
-    		]]>
+	<resultMap type="web.shoppingmall.domain.ProductVO" id="productMap">
+		<result property="productNo" column="product_no"/>
+		<result property="productName" column="product_name"/>
+		<result property="manufacName" column="manufac_name"/>
+		<result property="productStat" column="product_stat"/>
+		<result property="productStock" column="product_stock"/>
+		<result property="productPrice" column="product_price"/>
+		<result property="delivFee" column="deliv_fee"/>
+		<result property="sellerNo" column="seller_no"/>
+		<result property="categoryNo" column="category_no"/>
+		<result property="productReg" column="product_reg"/>
+		<result property="productUpdate" column="product_update"/>
+		<collection property="imgList" resultMap="imgMap"></collection>
+		<collection property="optionList" resultMap="optionMap"></collection>
+	</resultMap>
+	
+	<resultMap type="web.shoppingmall.domain.ImageDTO" id="imgMap">
+		<result property="imgNo" column="img_num"/>
+		<result property="imgName" column="img_name"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="imgUuid" column="img_uuid"/>
+		<result property="parentNo" column="parent_num"/>
+		<result property="imgReg" column="img_reg"/>
+		<result property="imgUpdate" column="img_update"/>
+	</resultMap>
+	
+	<resultMap type="web.shoppingmall.domain.OptionDTO" id="optionMap">
+		<result property="optionNo" column="option_no"/>
+		<result property="optionName" column="option_name"/>
+		<result property="optionDetail" column="option_detail"/>
+		<result property="optionStock" column="option_stock"/>
+		<result property="optionPrice" column="option_price"/>
+		<result property="productNo" column="product_no"/>
+		<result property="optionReg" column="option_reg"/>
+		<result property="optionUpdate" column="option_update"/>
+	</resultMap>
+
+	
+	<insert id="productReg" parameterType="web.shoppingmall.domain.ProductVO">
+	    <selectKey keyProperty="productNo,productReg,productUpdate"
+	    	resultType="web.shoppingmall.domain.ProductVO" order="BEFORE">
+			SELECT
+				'p'
+    			|| to_char(sysdate, 'YYYYMMDD')
+    			|| substr(p_seq.NEXTVAL + 10000, 2) as productNo,
+				SYSDATE as productReg,
+				SYSDATE as productUpdate
+			FROM
+				DUAL
 		</selectKey>
 		<![CDATA[
 			INSERT INTO product VALUES (
-			    #{p_num},
-			    #{p_name},
-			    #{p_stat},
-			    #{p_stock},
-			    #{p_price},
-			    #{deliv_fee},
-			    #{s_num},
-			    #{manufac_num},
-			    #{category_num},
-			    #{reg_date},
-			    #{up_date}
+				#{productNo},
+				#{productName},
+				#{manufacName},
+				#{productStat},
+				#{productStock},
+				#{productPrice},
+				#{delivFee},
+				#{sellerNo},
+				#{categoryNo},
+				#{productReg},
+				#{productUpdate}
 			)		
 		]]>
 	</insert>
-		
-	<select id="productDisplay" resultType="web.shoppingmall.domain.ProductVO">
+	<select id="productInform" resultMap="productMap">
 		SELECT
-		    *
+		    p.*,
+		    i.*,
+		    o.option_no,
+		    o.option_name,
+		    o.option_detail,
+		    o.option_stock,
+		    o.option_price,
+		    o.option_reg,
+		    o.option_update
 		FROM
-		    product
+		    product p,
+		    images  i,
+		    options o
 		WHERE
-		    p_num = #{p_num}
+		        p.product_no = #{productNo}
+		    AND p.product_no = i.parent_num (+)
+		    AND p.product_no = o.product_no (+)
 	</select>
 </mapper>

@@ -11,82 +11,82 @@
 			var detailCate = "";
 			var detailCount = 10000;
 			<c:forEach items="${category}" var="category">//카테고리 불러오기
-            	if (largeCate != "${category.large_category}") {
-            		largeCate = "${category.large_category}";
-            		//console.log("largeCate : " + largeCate);
-            		largeCount++;
-            		
-            		var categoryLi = document.createElement("li");
-                	categoryLi.setAttribute("class", "list-group-item")
-                	
-                	var categoryA = document.createElement("a");
-                	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", largeCount);
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0");
-                	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.large_category}");
-                	
-                	categoryLi.append(categoryA);
-                	
-                	$("#largeCategory").append(categoryLi);
-            	}
-            	if (mediumCate != "${category.medium_category}") {
-            		mediumCate = "${category.medium_category}";
-            		console.log("mediumCate : " + mediumCate);
-            		mediumCount++;
-            		
-            		var categoryLi = document.createElement("li");
-                	categoryLi.setAttribute("class", "list-group-item")
-                	
-                	var categoryA = document.createElement("a");
-                	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", mediumCount);
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+largeCount);
-                	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.medium_category}");
-                	
-                	categoryLi.append(categoryA);
-                	
-                	$("#mediumCategory").append(categoryLi);
-            	}
-            	if (smallCate != "${category.small_category}") {
-            		smallCate = "${category.small_category}";
-            		//console.log("smallCate : " + smallCate);
-            		smallCount++;
-            		
-            		var categoryLi = document.createElement("li");
-                	categoryLi.setAttribute("class", "list-group-item")
-                	
-                	var categoryA = document.createElement("a");
-                	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", smallCount);
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+mediumCount);
-                	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.small_category}");
-                	
-                	categoryLi.append(categoryA);
-                	
-                	$("#smallCategory").append(categoryLi);
-            	}
-            	if (detailCate != "${category.detail_category}") {
-            		detailCate = "${category.detail_category}";
-            		//console.log("detailCate : " + detailCate);
-            		detailCount++;
-            		
-            		var categoryLi = document.createElement("li");
-                	categoryLi.setAttribute("class", "list-group-item")
-                	
-                	var categoryA = document.createElement("a");
-                	categoryA.setAttribute("href", "#");
-                	categoryA.setAttribute("id", detailCount);
-                	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+smallCount);
-                	categoryA.setAttribute("style", "display: none;")
-                	categoryA.append("${category.detail_category}");
-                	
-                	categoryLi.append(categoryA);
-                	
-                	$("#detailCategory").append(categoryLi);
-            	}
+				if (largeCate != "${category.large_category}") {
+	        		largeCate = "${category.large_category}";
+	        		//console.log("largeCate : " + largeCate);
+	        		largeCount++;
+	        		
+	        		var categoryLi = document.createElement("li");
+	            	categoryLi.setAttribute("class", "list-group-item")
+	            	
+	            	var categoryA = document.createElement("a");
+	            	categoryA.setAttribute("href", "#");
+	            	categoryA.setAttribute("id", largeCount);
+	            	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0");
+	            	categoryA.setAttribute("style", "display: none;")
+	            	categoryA.append("${category.large_category}");
+	            	
+	            	categoryLi.append(categoryA);
+	            	
+	            	$("#largeCategory").append(categoryLi);
+	        	}
+	        	if (mediumCate != "${category.medium_category}") {
+	        		mediumCate = "${category.medium_category}";
+	        		//console.log("mediumCate : " + mediumCate);
+	        		mediumCount++;
+	        		
+	        		var categoryLi = document.createElement("li");
+	            	categoryLi.setAttribute("class", "list-group-item")
+	            	
+	            	var categoryA = document.createElement("a");
+	            	categoryA.setAttribute("href", "#");
+	            	categoryA.setAttribute("id", mediumCount);
+	            	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+largeCount);
+	            	categoryA.setAttribute("style", "display: none;")
+	            	categoryA.append("${category.medium_category}");
+	            	
+	            	categoryLi.append(categoryA);
+	            	
+	            	$("#mediumCategory").append(categoryLi);
+	        	}
+	        	if (smallCate != "${category.small_category}") {
+	        		smallCate = "${category.small_category}";
+	        		//console.log("smallCate : " + smallCate);
+	        		smallCount++;
+	        		
+	        		var categoryLi = document.createElement("li");
+	            	categoryLi.setAttribute("class", "list-group-item")
+	            	
+	            	var categoryA = document.createElement("a");
+	            	categoryA.setAttribute("href", "#");
+	            	categoryA.setAttribute("id", smallCount);
+	            	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+mediumCount);
+	            	categoryA.setAttribute("style", "display: none;")
+	            	categoryA.append("${category.small_category}");
+	            	
+	            	categoryLi.append(categoryA);
+	            	
+	            	$("#smallCategory").append(categoryLi);
+	        	}
+	        	if (detailCate != "${category.detail_category}") {
+	        		detailCate = "${category.detail_category}";
+	        		//console.log("detailCate : " + detailCate);
+	        		detailCount++;
+	        		
+	        		var categoryLi = document.createElement("li");
+	            	categoryLi.setAttribute("class", "list-group-item")
+	            	
+	            	var categoryA = document.createElement("a");
+	            	categoryA.setAttribute("href", "#");
+	            	categoryA.setAttribute("id", detailCount);
+	            	categoryA.setAttribute("class", "btn btn-outline-light btn-sm border-0 pNo-"+smallCount);
+	            	categoryA.setAttribute("style", "display: none;")
+	            	categoryA.append("${category.detail_category}");
+	            	
+	            	categoryLi.append(categoryA);
+	            	
+	            	$("#detailCategory").append(categoryLi);
+	        	}
         	</c:forEach>//카테고리 불러오기
         	
         	 //카테고리 토글

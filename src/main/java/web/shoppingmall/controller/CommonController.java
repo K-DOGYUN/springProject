@@ -13,14 +13,17 @@ public class CommonController {
 	private IncludesService iService;
 	
 	@GetMapping("/memberLogin")
-	public void login(String error, String logout, Model model) {
-		System.out.println("error : " + error);
-		System.out.println("logout : " + logout);
+	public void login(String error, String logout, String Message, Model model) {
 		if(error != null) {
+			System.out.println("error : " + error);
 			model.addAttribute("error", "Login Error occured");
 		}
 		if(logout != null) {
+			System.out.println("logout : " + logout);
 			model.addAttribute("logout", "LogOut!!");
+		}
+		if(Message != null) {
+			model.addAttribute("Message", "Message");
 		}
 	}
 	

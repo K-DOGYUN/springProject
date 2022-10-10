@@ -22,8 +22,6 @@ public class MemberMapperTest {
 	@Autowired
 	private MemberMapper mapper;
 	@Autowired
-	private AddressMapper addrMapper;
-	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
 	@Test
@@ -33,7 +31,7 @@ public class MemberMapperTest {
 		AddressDTO addressDTO2 = new AddressDTO();
 		List<AddressDTO> addrList = new ArrayList<AddressDTO>();
 		
-		memberVO.setMemberId("aefdaf002@naver.com");
+		memberVO.setMemberId("customer001@naver.com");
 		memberVO.setMemberPw(encoder.encode("1234"));
 		memberVO.setMemberName("memberName");
 		memberVO.setMemberPhone("111-1111-1111");
@@ -57,7 +55,11 @@ public class MemberMapperTest {
 //		System.out.println(memberVO.getMemberId());
 //		memberVO.setAddrList(addrList);
 		
-		mapper.memberReg(memberVO);
+//		mapper.memberReg(memberVO);
+		mapper.memberInform("customer@naver.com");
+//		mapper.memberModify(memberVO);
+//		mapper.memberDelete(memberVO.getMemberId());
+		
 //		memberVO.getAddrList().forEach(addr -> System.out.println(addr));
 //		memberVO.getAddrList().forEach(addr -> addrMapper.AddrRegistration(addr));
 //		System.out.println(mapper.customerInformation("customer002@naver.com"));

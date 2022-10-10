@@ -4,6 +4,30 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="web.shoppingmall.mapper.MemberMapper">
+	<resultMap type="web.shoppingmall.domain.MemberVO" id="memberMap">
+		<result property="memberId" column="member_id"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="memberName" column="member_name"/>
+		<result property="memberPhone" column="member_phone"/>
+		<result property="auth" column="auth"/>
+		<result property="memberState" column="member_state"/>
+		<result property="businessNo" column="business_no"/>
+		<result property="employeeNo" column="employee_no"/>
+		<result property="memberReg" column="member_reg"/>
+		<result property="memberUpdate" column="member_update"/>
+		<collection property="addrList" resultMap="addrMap"></collection>
+	</resultMap>
+	
+	<resultMap type="web.shoppingmall.domain.AddressDTO" id="addrMap">
+		<result property="addrNo" column="addr_num"/>		
+		<result property="mainAddr" column="addr_main"/>		
+		<result property="detailAddr" column="addr_detail"/>		
+		<result property="zipNo" column="addr_zipno"/>		
+		<result property="memberId" column="member_id"/>		
+		<result property="addrReg" column="addr_reg"/>		
+		<result property="addrUpdate" column="addr_update"/>		
+	</resultMap>
+
 	<insert id="memberReg">
 		<selectKey keyProperty="memberReg" keyColumn="sysdate" resultType="Date" order="BEFORE">
 			SELECT
@@ -19,9 +43,56 @@
 			#{auth},
 			1,
 			#{businessNo},
-			#{empNo},
+			#{employeeNo},
 			#{memberReg},
 			#{memberReg}
 		)
 	</insert>
+	<select id="memberInform" resultMap="memberMap">
+		SELECT
+		    m.member_id,
+		    m.member_pw,
+		    m.member_name,
+		    m.member_phone,
+		    m.auth,
+		    m.member_state,
+		    m.business_no,
+		    m.emp_no,
+		    m.member_reg,
+		    m.member_update,
+		    addr.addr_num,
+		    addr.addr_main,
+		    addr.addr_detail,
+		    addr.addr_zipno,
+		    addr.addr_reg,
+		    addr.addr_update
+		FROM
+		    member  m
+		    LEFT OUTER JOIN address addr ON m.member_id = addr.member_id
+		WHERE
+		    m.member_id = #{memberId}
+		ORDER BY
+		    addr_num ASC
+	</select>
+	<update id="memberModify">
+		<selectKey keyProperty="memberUpdate" keyColumn="sysdate" resultType="Date" order="BEFORE">
+			SELECT
+			    sysdate
+			FROM
+			    dual
+		</selectKey>
+		UPDATE member
+		SET
+		    member_pw = #{memberPw},
+		    member_name = #{memberName},
+		    member_phone = #{memberPhone},
+		    business_no = #{businessNo},
+		    emp_no = #{employeeNo},
+		    member_update = #{memberUpdate}
+		WHERE
+		    member_id = #{memberId}
+	</update>
+	<delete id="memberDelete">
+		delete from member where member_id = #{memeberId}
+	</delete>
 </mapper>
