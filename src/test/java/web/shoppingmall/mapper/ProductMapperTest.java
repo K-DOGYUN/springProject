@@ -70,7 +70,12 @@ public class ProductMapperTest {
 //			img.setParentNo(productVO.getProductNo());
 //			iMapper.imageRegister(img);
 //		});
-		pMapper.productInform("p202210110021");
-
+		ProductVO vo = pMapper.productInform("p202210110003");
+		vo.getOptionList().forEach(option -> {
+			System.out.println(option);
+		});
+		vo.getImgList().forEach(img -> {
+			System.out.println(img);
+		});
 	}
 }

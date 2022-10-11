@@ -1,9 +1,14 @@
 package web.shoppingmall.service;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import web.shoppingmall.domain.OptionDTO;
 import web.shoppingmall.domain.ProductVO;
 import web.shoppingmall.mapper.ImageMapper;
 import web.shoppingmall.mapper.OptionMapper;
@@ -23,19 +28,19 @@ public class ProductServiceImpl implements ProductService {
 		productVO.setProductStat(1);
 		System.out.println("productReg : " + productVO);
 		pMapper.productReg(productVO);
-		
-		if(productVO.getOptionList() != null) {	
+
+		if (productVO.getOptionList() != null) {
 			productVO.getOptionList().forEach(optn -> {
-				if(optn.getOptionName() != null) {
+				if (optn.getOptionName() != null) {
 					optn.setProductNo(productVO.getProductNo());
 					System.out.println("optionReg : " + optn);
 					oMapper.optionReg(optn);
 				}
 			});
 		}
-		if(productVO.getImgList() != null) {
+		if (productVO.getImgList() != null) {
 			productVO.getImgList().forEach(img -> {
-				if(img.getImgName() != null	) {
+				if (img.getImgName() != null) {
 					img.setParentNo(productVO.getProductNo());
 					System.out.println("imageReg : " + img);
 					iMapper.imageRegister(img);
@@ -48,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductVO productInform(String productNo) {
 		System.out.println("productInform : " + productNo);
 		ProductVO vo = pMapper.productInform(productNo);
-		vo.getImgList().forEach(img ->{
+		vo.getImgList().forEach(img -> {
 			img.setImgPath(img.getImgPath().replace("\\", "/"));
 			System.out.println(img.getImgPath());
 		});

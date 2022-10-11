@@ -84,9 +84,7 @@
 					<label for="imageUpload" class="form-label mt-2">Image Upload</label>
 					<input type="file" class="form-control" id="imageUpload" name="imageUpload" placeholder="Image Upload" multiple="multiple">
 					<div class="row" id="imgBox">
-					</div>
-					<button type="button" class="d-block btn btn-sm btn-dark m-auto" onclick="goPopup()">주소 추가</button>
-					
+					</div>					
 				</div>
 				<div class="col mt-2">
 					<button type="submit" id="SubmitButton" class="btn btn-primary m-auto">Submit</button>

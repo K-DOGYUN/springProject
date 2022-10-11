@@ -1,4 +1,4 @@
-package web.shoppingmall.controller;
+	package web.shoppingmall.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -87,7 +87,7 @@ public class ImageController {
 						new File(imageFolderPath, "ss_" + imageUUID + "_" + imageName)
 				);
 				Thumbnailator.createThumbnail(mpf.getInputStream(), thumbnail, 200, 200);
-				Thumbnailator.createThumbnail(mpf.getInputStream(), sThumbnail, 20, 20);
+				Thumbnailator.createThumbnail(mpf.getInputStream(), sThumbnail, 40, 40);
 				
 				thumbnail.close();
 				sThumbnail.close();

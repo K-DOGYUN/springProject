@@ -89,5 +89,7 @@
 		        p.product_no = #{productNo}
 		    AND p.product_no = i.parent_num (+)
 		    AND p.product_no = o.product_no (+)
+		ORDER BY
+   			o.option_name, i.img_num
 	</select>
 </mapper>
